@@ -58,6 +58,7 @@ def vacc_submit(rundict):
 
     filename = save_tempjson(rundict)    
 
+    print('hello')
     #create generic function executor to be called within vacc job
     executor_path = Path(f'{random.randint(1,10e10):015}.py')
     with open(executor_path,'w') as f:
@@ -75,6 +76,7 @@ if __name__ == '__main__':
     _execute(args.runstring_filename)
 """)
 
+    print('goodbye')
 
     subscript = \
         f"""#!/bin/sh
