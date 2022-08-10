@@ -17,7 +17,7 @@ def load_tempjson(filename):
     
     return out
 
-def execute(runstring_filename):
+def _execute(runstring_filename):
     
     
     #load rundict
