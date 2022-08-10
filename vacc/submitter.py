@@ -44,6 +44,17 @@ def _execute(runstring_filename):
 
 
 def vacc_submit(rundict):
+    
+    """
+    Run an arbitary function on the vacc
+    
+    Args:
+        rundict: a dictionary where keys are <function path> strings and values are function args
+            example: {
+                'module1.submodule3.func1':dict(arg1=3,arg2=False),
+                'module2.myfunction':dict()
+            }
+    """
 
     filename = save_tempjson(rundict)    
 
@@ -85,6 +96,6 @@ if __name__ == '__main__':
     subprocess.call([script],shell=True)
     
     #delete generic function executor
-    executor_path.unlink
+    executor_path.unlink()
     
     
