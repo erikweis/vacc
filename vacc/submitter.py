@@ -50,20 +50,19 @@ def vacc_submit(rundict):
     #create generic function executor to be called within vacc job
     executor_path = Path(f'{random.randint(1,10e10):015}.py')
     with open(executor_path,'w') as f:
-        f.write("""
-                from vacc import _execute
-                import argparse
-                
-                if __name__ == '__main__':
-                    
-                    parser = argparse.ArgumentParser()
-                    parser.add_argument('runstring_filename', type = str , help = 'file with run information')
+        f.write(
+"""
+from vacc import _execute
+import argparse
 
-                    args = parser.parse_args()
-                    _execute(args.runstring_filename)
+if __name__ == '__main__':
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument('runstring_filename', type = str , help = 'file with run information')
 
-                    
-                """)
+    args = parser.parse_args()
+    _execute(args.runstring_filename)
+""")
 
 
     subscript = \
