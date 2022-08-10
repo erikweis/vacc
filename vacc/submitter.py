@@ -60,7 +60,7 @@ def vacc_submit(rundict):
 
     print('hello')
     #create generic function executor to be called within vacc job
-    executor_path = Path(f'{random.randint(1,10e10):015}.py')
+    executor_path = BASE_DIR / f'{random.randint(1,10e10):015}.py'
     with open(executor_path,'w') as f:
         f.write(
 """
@@ -88,6 +88,8 @@ if __name__ == '__main__':
 
 
         python {executor_path.name} $RUNSTRINGFILENAME"""
+    
+    print(subscript)
     
     with open('subscript.sbatch','w') as f:
         f.write(subscript)
