@@ -43,7 +43,7 @@ def _execute(runstring_filename):
         f(**args)
 
 
-def vacc_submit(rundict):
+def vacc_submit(rundict, **kwargs):
     
     """
     Run an arbitary function on the vacc
@@ -58,7 +58,6 @@ def vacc_submit(rundict):
 
     filename = save_tempjson(rundict)    
 
-    print('hello')
     #create generic function executor to be called within vacc job
     executor_path = BASE_DIR / f'{random.randint(1,10e10):015}.py'
     with open(executor_path,'w') as f:
@@ -76,18 +75,19 @@ if __name__ == '__main__':
     _execute(args.runstring_filename)
 """)
 
-    print('goodbye')
+    ###########################
+    ### create sbatch script ##
+    ###########################
+    subscript = """#!/bin/sh"""
 
-    subscript = \
-        f"""#!/bin/sh
+    for k,v in kwargs.items():        
+        subscript += f"\n#SBATCH --{k}={v}"
 
-        #SBATCH --nodes=1
-        #SBATCH --mem=2gb
-        #SBATCH --time=12:00:00
-        #SBATCH --job-name=1997
-
-
-        python {executor_path.name} $RUNSTRINGFILENAME"""
+    subscript += \
+f"""
+python {executor_path.name} $RUNSTRINGFILENAME
+rm {executor_path.name}
+"""
     
     print(subscript)
     
@@ -97,9 +97,7 @@ if __name__ == '__main__':
     script = '/usr/bin/sbatch'
     script += f' --export=ALL,RUNSTRINGFILENAME={filename}'
     script += ' subscript.sbatch'
+    script += "\n rm subscript.sbatch"
     subprocess.call([script],shell=True)
-    
-    #delete generic function executor
-    executor_path.unlink()
     
     
