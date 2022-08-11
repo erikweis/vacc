@@ -1,11 +1,11 @@
-# vacc-util: Overview
+# vacc: A python helper package running scripts on the VACC
  A package to faciliate running python scrips on the UVM's VACC..
 
  The package has two main modules, `rsync` and `submitter`. The former is meant to accelerate the process of transfering files to and from the vacc. The latter is for use on the vacc to submit vacc jobs from a python script.
 
 # Installation
 
-To install, run `pip install vacc-util`.
+To install, run `pip install vacc`.
 
  ## Rsync
 

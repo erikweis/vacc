@@ -1,6 +1,6 @@
 from setuptools import setup
 
-setup(name='vacc-util',
+setup(name='vacc',
       version='0.1',
       description="Helper package for running code on UVM's VACC",
       url='http://github.com/erikweis/vacc',
