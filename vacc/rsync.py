@@ -74,5 +74,9 @@ def vacc_pull(
 
     script = f"""
         rsync -a{'n' if dry_run else ''}P {vacc_pointer}:{source_path}/ {destination_path}"""
+    
+    if rsync_commands is not None:
+        for x in rsync_commands:
+            script += f" {x}"
 
     subprocess.call([script],shell=True)
